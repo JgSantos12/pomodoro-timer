@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="fundo">
+        <h1 class="titulo">Pomodoro Timer</h1>
+        <div class="container">
+            <div class="modos">
+                <button class="modo foco" id="botaoFoco">Pomodoro</button>
+                <button class="modo curta" id="botaoCurta">Pausa Curta</button>
+                <button class="modo longa" id="botaoLonga">Pausa Longa</button>
+            </div>
+
+            <div class="div-timer">
+                <h1 class="timer">00:00</h1>
+            </div>
+
+            <div class="acoes">
+                <button class="acao" id="comecar">Começar</button>
+                <button class="acao" id="pausar">Pausar</button>
+                <button class="acao" id="reiniciar">Resetar</button>
+            </div>
+            <button class="acao" id="configuracoes">Configurações</button>
+        </div>
+    </main>
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <h2 class="modal-titulo">Configurações</h2>
+
+            <div class="modal-inputs">
+                <div class="label-input">
+                    <p class="modal-label">Foco:</p><input type="number" class="modal-input" id="inputFoco">
+                </div>
+                <div class="label-input">
+                    <p class="modal-label">Pausa Curta:</p><input type="number" class="modal-input" id="inputCurta">
+                </div>
+                <div class="label-input">
+                    <p class="modal-label">Pausa Longa:</p><input type="number" class="modal-input" id="inputLonga">
+                </div>
+            </div>
+
+            <button class="modal-salvar">Salvar</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
