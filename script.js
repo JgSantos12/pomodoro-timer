@@ -36,6 +36,7 @@ let temposLonga = 30;
 
 // Modo atual — usado pelo resetar pra saber qual tempo restaurar
 let modoAtual = 'foco';
+let ciclosFoco = 0;
 
 let tempoRestante = temposFoco * 60;
 let intervalo = null;
@@ -115,6 +116,15 @@ function aplicarCores(corContainer, corTimer, corAtiva, varContainer, varTimer, 
     modalSalvar.onmouseleave = () => modalSalvar.style.backgroundColor = corAtiva;
 }
 
+const botoesModo = [botaoFoco, botaoCurta, botaoLonga];
+
+function marcarBotaoAtivo(botaoAtivo, corAtiva) {
+    botoesModo.forEach(botao => {
+        botao.style.backgroundColor = ''; // reseta todos
+    });
+    botaoAtivo.style.backgroundColor = corAtiva;
+}
+
 // ==========================================
 // MODOS
 // ==========================================
@@ -126,6 +136,7 @@ function modoFoco() {
         'var(--cor-foco)',
         'var(--foco-ativo)'
     );
+    marcarBotaoAtivo(botaoFoco, 'var(--foco-ativo)');
     resetarTimer();
 }
 
@@ -136,6 +147,7 @@ function modoCurta() {
         'var(--cor-pausa-curta)',
         'var(--curta-ativa)'
     );
+    marcarBotaoAtivo(botaoCurta, 'var(--curta-ativa)');
     resetarTimer();
 }
 
@@ -146,6 +158,7 @@ function modoLonga() {
         'var(--cor-pausa-longa)',
         'var(--longa-ativa)'
     );
+    marcarBotaoAtivo(botaoLonga, 'var(--longa-ativa)');
     resetarTimer();
 }
 
@@ -208,8 +221,17 @@ function resetarTimer() {
 
 // Troca de modo automática quando o tempo acaba
 function trocarModoAutomatico() {
-    if (modoAtual === 'foco') modoCurta();
-    else modoFoco();
+    if (modoAtual === 'foco') {
+        ciclosFoco++;
+        if (ciclosFoco === 4){
+            ciclosFoco = 0;
+            modoLonga();
+        } else {
+            modoCurta();
+        }
+    } else {
+        modoFoco();
+    }
 }
 
 botaoStart.addEventListener('click', iniciarTimer);
